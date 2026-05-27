@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NT Fire Timeline Map</title>
+    <meta
+      name="description"
+      content="Interactive Northern Territory fire-history timeline map built with Leaflet and GeoJSON."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Northern Territory fire history</p>
+          <h1>NT Fire Timeline Map</h1>
+          <p class="intro">
+            Explore fire extents by year on an interactive map using the NT Fire History dataset.
+          </p>
+        </div>
+        <div class="hero-meta">
+          <span class="pill">Leaflet</span>
+          <span class="pill">GeoJSON</span>
+          <span class="pill">Year timeline</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="sidebar">
+          <section class="panel panel-accent">
+            <p class="panel-label">Selected year</p>
+            <div class="selected-year" id="selectedYear">2025</div>
+            <p class="selected-subtitle" id="selectedSubtitle">Showing all fire polygons for the year.</p>
+          </section>
+
+          <section class="stats-grid">
+            <article class="stat-card">
+              <p class="stat-label">Polygons shown</p>
+              <strong id="polygonCount">0</strong>
+            </article>
+            <article class="stat-card">
+              <p class="stat-label">Total burnt area</p>
+              <strong id="totalArea">0 ha</strong>
+            </article>
+            <article class="stat-card">
+              <p class="stat-label">Coverage</p>
+              <strong id="coverageRange">2020-2025</strong>
+            </article>
+          </section>
+
+          <section class="panel">
+            <p class="panel-label">Dataset info</p>
+            <h2>Source and coverage</h2>
+            <p>
+              Fire polygons come from the NT Fire History GeoPackage published by the Northern Territory Government.
+              The app preprocesses the layer into browser-ready GeoJSON and filters it by ignition year.
+            </p>
+            <ul class="info-list">
+              <li><span>Source</span><strong>NT Government Open Data Portal</strong></li>
+              <li><span>Fields</span><strong>fire_id, ignition_date, area_ha, fire_type</strong></li>
+              <li><span>Use</span><strong>Map-first visual review</strong></li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <p class="panel-label">Legend</p>
+            <div class="legend" id="legend"></div>
+          </section>
+        </aside>
+
+        <section class="map-panel">
+          <div id="map" class="map"></div>
+        </section>
+      </main>
+
+      <footer class="timeline-bar">
+        <div class="timeline-group">
+          <div class="timeline-header">
+            <span>Year filter</span>
+            <strong id="timelineLabel">2025</strong>
+          </div>
+          <label class="filter-select-wrap" for="yearFilter">
+            <span class="sr-only">Select year</span>
+            <select id="yearFilter" class="year-filter"></select>
+          </label>
+        </div>
+      </footer>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>

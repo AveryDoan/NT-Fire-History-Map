@@ -1,0 +1,18 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Serve NT Fire Timeline Map",
+			"type": "shell",
+			"command": "\"/Users/averydoan/Library/CloudStorage/OneDrive-CharlesDarwinUniversity/Side quest/NT-Fire-History-Map/.venv/bin/python\"",
+			"args": [
+				"-m",
+				"http.server",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

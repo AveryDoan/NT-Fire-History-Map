@@ -45,7 +45,7 @@ body {
 .hero,
 .panel,
 .stat-card,
-.timeline-bar {
+.map-toolbar {
   border: 1px solid var(--border);
   background: var(--panel);
   backdrop-filter: blur(12px);
@@ -124,6 +124,12 @@ h1 {
   padding: 20px;
 }
 
+.panel-copy {
+  margin-bottom: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .panel-accent {
   background: linear-gradient(135deg, rgba(196, 79, 29, 0.14), rgba(42, 111, 73, 0.14));
 }
@@ -165,20 +171,26 @@ h1 {
   border: 1px solid var(--map-border);
   box-shadow: var(--shadow);
   background: #e9ecef;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
 }
 
 .map {
   width: 100%;
-  height: min(72vh, 860px);
+  height: 100%;
+  min-height: min(68vh, 760px);
 }
 
-.timeline-bar {
+.map-toolbar {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
-  align-items: center;
-  padding: 18px 20px;
-  border-radius: 24px;
+  align-items: end;
+  padding: 16px 18px 18px;
+  border: 0;
+  border-top: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
 }
 
 .control-button {
@@ -198,8 +210,30 @@ h1 {
   background: #ab4118;
 }
 
+.control-button-secondary {
+  width: fit-content;
+  padding: 11px 16px;
+  background: rgba(22, 33, 43, 0.08);
+  color: var(--text);
+}
+
+.control-button-secondary:hover {
+  background: rgba(22, 33, 43, 0.12);
+}
+
 .timeline-group {
   display: grid;
+  gap: 10px;
+}
+
+.timeline-group-primary {
+  min-width: 0;
+}
+
+.toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 10px;
 }
 
@@ -216,6 +250,36 @@ h1 {
   color: var(--text);
   font: inherit;
   font-weight: 600;
+}
+
+.timeline-header-month {
+  margin-top: 6px;
+}
+
+.month-slider {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.month-ticks {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.month-ticks span {
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.month-ticks span:first-child {
+  transform: translateX(0);
+}
+
+.month-ticks span:last-child {
+  transform: translateX(-100%);
 }
 
 .sr-only {
@@ -271,7 +335,26 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.95rem;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.legend-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(22, 33, 43, 0.08);
+}
+
+.legend-item.is-active {
+  border-color: rgba(196, 79, 29, 0.35);
+  background: linear-gradient(135deg, rgba(196, 79, 29, 0.12), rgba(255, 255, 255, 0.92));
 }
 
 .legend-swatch {
@@ -316,7 +399,7 @@ h1 {
   }
 
   .map {
-    height: 66vh;
+    min-height: 58vh;
   }
 }
 
@@ -330,12 +413,24 @@ h1 {
   }
 
   .hero,
-  .timeline-bar {
+  .map-toolbar {
     grid-template-columns: 1fr;
   }
 
   .year-filter {
     width: 100%;
+  }
+
+  .month-ticks {
+    font-size: 0.75rem;
+  }
+
+  .toolbar-actions {
+    justify-content: flex-start;
+  }
+
+  .legend-item {
+    font-size: 0.95rem;
   }
 
   .hero {

@@ -6,7 +6,8 @@ A small browser-based MVP for exploring Northern Territory fire extents over tim
 
 - Shows an interactive Leaflet map centered on the Northern Territory.
 - Loads fire polygons from the NT Fire History GeoPackage after preprocessing them into GeoJSON.
-- Lets you scrub through years with a timeline slider and play/pause control.
+- Lets you pick a year first, then scrub by month within that year.
+- Lets you filter fire types from the legend and auto-scroll through months.
 - Shows summary cards for polygon count and total burnt area.
 - Includes a simple legend and dataset attribution panel.
 
@@ -36,6 +37,6 @@ Then visit `http://localhost:8000` in a browser.
 
 ## Notes
 
-- The MVP filters by ignition year as the primary time interaction.
+- The MVP filters by ignition year first and then by ignition month within the selected year, with fire-type toggles on the legend.
 - `area_ha` is used for the summary card because the source dataset includes it for all features in the current GeoPackage.
 - The UI is intentionally simple so the map stays the main focus.

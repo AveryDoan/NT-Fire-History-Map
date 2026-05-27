@@ -35,16 +35,16 @@
         <div class="hero-meta">
           <span class="pill">Leaflet</span>
           <span class="pill">GeoJSON</span>
-          <span class="pill">Year timeline</span>
+          <span class="pill">Year + month filter</span>
         </div>
       </header>
 
       <main class="workspace">
         <aside class="sidebar">
           <section class="panel panel-accent">
-            <p class="panel-label">Selected year</p>
-            <div class="selected-year" id="selectedYear">2025</div>
-            <p class="selected-subtitle" id="selectedSubtitle">Showing all fire polygons for the year.</p>
+            <p class="panel-label">Selected period</p>
+            <div class="selected-year" id="selectedYear">Aug 2025</div>
+            <p class="selected-subtitle" id="selectedSubtitle">Showing fire polygons for the selected month.</p>
           </section>
 
           <section class="stats-grid">
@@ -67,7 +67,7 @@
             <h2>Source and coverage</h2>
             <p>
               Fire polygons come from the NT Fire History GeoPackage published by the Northern Territory Government.
-              The app preprocesses the layer into browser-ready GeoJSON and filters it by ignition year.
+              The app preprocesses the layer into browser-ready GeoJSON and filters it by ignition year, month, and fire type.
             </p>
             <ul class="info-list">
               <li><span>Source</span><strong>NT Government Open Data Portal</strong></li>
@@ -77,28 +77,42 @@
           </section>
 
           <section class="panel">
-            <p class="panel-label">Legend</p>
+            <p class="panel-label">Fire type filter</p>
+            <p class="panel-copy">Toggle one or more fire types to refine the map.</p>
             <div class="legend" id="legend"></div>
           </section>
         </aside>
 
         <section class="map-panel">
           <div id="map" class="map"></div>
+          <section class="map-toolbar" aria-label="Map controls">
+            <div class="timeline-group timeline-group-primary">
+              <div class="timeline-header">
+                <span>Year filter</span>
+                <strong id="yearLabel">2025</strong>
+              </div>
+              <label class="filter-select-wrap" for="yearFilter">
+                <span class="sr-only">Select year</span>
+                <select id="yearFilter" class="year-filter"></select>
+              </label>
+              <div class="timeline-header timeline-header-month">
+                <span>Month filter</span>
+                <strong id="monthLabel">Aug 2025</strong>
+              </div>
+              <input id="monthSlider" class="month-slider" type="range" min="0" max="0" step="1" value="0" />
+              <div id="monthTicks" class="month-ticks"></div>
+            </div>
+
+            <div class="toolbar-actions">
+              <button id="monthPrev" class="control-button control-button-secondary" type="button">Prev month</button>
+              <button id="monthPlayPause" class="control-button control-button-secondary" type="button">Auto-scroll</button>
+              <button id="monthNext" class="control-button control-button-secondary" type="button">Next month</button>
+              <button id="resetFilters" class="control-button control-button-secondary" type="button">Reset</button>
+              <button id="fitMap" class="control-button control-button-secondary" type="button">Fit NT</button>
+            </div>
+          </section>
         </section>
       </main>
-
-      <footer class="timeline-bar">
-        <div class="timeline-group">
-          <div class="timeline-header">
-            <span>Year filter</span>
-            <strong id="timelineLabel">2025</strong>
-          </div>
-          <label class="filter-select-wrap" for="yearFilter">
-            <span class="sr-only">Select year</span>
-            <select id="yearFilter" class="year-filter"></select>
-          </label>
-        </div>
-      </footer>
     </div>
 
     <script
